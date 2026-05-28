@@ -34,6 +34,7 @@
 
     html {
       scroll-behavior: smooth;
+      scroll-padding-top: var(--nav-height);
     }
 
     body {
@@ -42,6 +43,8 @@
       color: var(--text);
       line-height: 1.6;
       overflow-x: hidden;
+      -webkit-font-smoothing: antialiased;
+      text-rendering: geometricPrecision;
     }
 
     a {
@@ -564,6 +567,67 @@
       font-size: 0.86rem;
     }
 
+    /* SMOOTH SCROLL ANIMATIONS */
+    .scroll-reveal {
+      opacity: 0;
+      transform: translateY(28px);
+      filter: blur(6px);
+      transition:
+        opacity 850ms cubic-bezier(0.22, 1, 0.36, 1),
+        transform 850ms cubic-bezier(0.22, 1, 0.36, 1),
+        filter 850ms cubic-bezier(0.22, 1, 0.36, 1);
+      will-change: opacity, transform, filter;
+    }
+
+    .scroll-reveal.visible {
+      opacity: 1;
+      transform: translateY(0);
+      filter: blur(0);
+    }
+
+    .scroll-reveal.delay-1 {
+      transition-delay: 90ms;
+    }
+
+    .scroll-reveal.delay-2 {
+      transition-delay: 180ms;
+    }
+
+    .scroll-reveal.delay-3 {
+      transition-delay: 270ms;
+    }
+
+    .hero-content {
+      animation: heroFade 1000ms cubic-bezier(0.22, 1, 0.36, 1) both;
+    }
+
+    @keyframes heroFade {
+      from {
+        opacity: 0;
+        transform: translateY(12px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(-10px);
+      }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      html {
+        scroll-behavior: auto;
+      }
+
+      .scroll-reveal,
+      .hero-content,
+      .scroll-dot span {
+        animation: none;
+        transition: none;
+        opacity: 1;
+        transform: none;
+        filter: none;
+      }
+    }
+
     /* RESPONSIVE */
     @media (max-width: 980px) {
       .categories {
@@ -706,7 +770,7 @@
 
     <section class="section-light about" id="about">
       <div class="container">
-        <div class="section-heading">
+        <div class="section-heading scroll-reveal">
           <h2>What is North Theory?</h2>
           <p>North Theory breaks down life and travel in the Arctic into simple, useful lessons. From what to wear in Tromsø in January to how to avoid common winter mistakes, the goal is to help visitors feel prepared, safe, and curious about the North.</p>
         </div>
@@ -716,7 +780,7 @@
     <section class="section-deep">
       <div class="container">
         <div class="categories">
-          <article class="info-card">
+          <article class="info-card scroll-reveal">
             <svg class="icon" viewBox="0 0 32 32" fill="none" aria-hidden="true">
               <circle cx="16" cy="16" r="12" stroke="currentColor" stroke-width="2"/>
               <path d="M12 20L14.5 14.5L20 12L17.5 17.5L12 20Z" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/>
@@ -725,7 +789,7 @@
             <p>Practical tips for visiting Northern Norway, Tromsø, and cold-weather destinations.</p>
           </article>
 
-          <article class="info-card">
+          <article class="info-card scroll-reveal">
             <svg class="icon" viewBox="0 0 32 32" fill="none" aria-hidden="true">
               <path d="M16 4L25 8V15C25 21 21.2 25.6 16 28C10.8 25.6 7 21 7 15V8L16 4Z" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/>
             </svg>
@@ -733,7 +797,7 @@
             <p>What tourists often underestimate: ice, wind, darkness, clothing, roads, and weather.</p>
           </article>
 
-          <article class="info-card">
+          <article class="info-card scroll-reveal">
             <svg class="icon" viewBox="0 0 32 32" fill="none" aria-hidden="true">
               <path d="M16 3L18.7 12.8L28 16L18.7 19.2L16 29L13.3 19.2L4 16L13.3 12.8L16 3Z" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/>
               <path d="M25 4V10M22 7H28" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
@@ -742,7 +806,7 @@
             <p>Simple explanations, viewing tips, mistakes to avoid, and realistic expectations.</p>
           </article>
 
-          <article class="info-card">
+          <article class="info-card scroll-reveal">
             <svg class="icon" viewBox="0 0 32 32" fill="none" aria-hidden="true">
               <path d="M6 7H14C16.2 7 18 8.8 18 11V27C18 24.8 16.2 23 14 23H6V7Z" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/>
               <path d="M26 7H18C15.8 7 14 8.8 14 11V27C14 24.8 15.8 23 18 23H26V7Z" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/>
@@ -756,13 +820,13 @@
 
     <section class="section-light" id="guides">
       <div class="container">
-        <div class="section-heading">
+        <div class="section-heading scroll-reveal">
           <h2>Start here</h2>
           <p>Begin with the essentials: clothing, common mistakes, and what visitors should know before travelling north.</p>
         </div>
 
         <div class="guides">
-          <article class="guide-card">
+          <article class="guide-card scroll-reveal">
             <div class="guide-image" style="background-image: url('./tromso-winter.jpg');"></div>
             <div class="guide-body">
               <div>
@@ -773,7 +837,7 @@
             </div>
           </article>
 
-          <article class="guide-card">
+          <article class="guide-card scroll-reveal">
             <div class="guide-image" style="background-image: url('./arctic-road.jpg');"></div>
             <div class="guide-body">
               <div>
@@ -784,7 +848,7 @@
             </div>
           </article>
 
-          <article class="guide-card">
+          <article class="guide-card scroll-reveal">
             <div class="guide-image" style="background-image: url('./aurora.jpg');"></div>
             <div class="guide-body">
               <div>
@@ -800,7 +864,7 @@
 
     <section class="midnight">
       <div class="container">
-        <div class="section-heading">
+        <div class="section-heading scroll-reveal">
           <h2>From polar night to midnight sun</h2>
           <p>North Theory explores the full rhythm of life in the Arctic — from dark winter nights and northern lights to bright summer evenings above the Arctic Circle.</p>
         </div>
@@ -809,20 +873,20 @@
 
     <section class="section-deep" id="videos">
       <div class="container">
-        <div class="section-heading">
+        <div class="section-heading scroll-reveal">
           <h2>Short lessons from the North</h2>
           <p>Follow North Theory for short, practical videos about Arctic travel, Tromsø, winter safety, northern lights, midnight sun, and life above the Arctic Circle.</p>
         </div>
 
         <div class="video-links">
-          <a class="social-btn" href="#" aria-label="North Theory on TikTok">
+          <a class="social-btn scroll-reveal" href="#" aria-label="North Theory on TikTok">
             <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
               <path d="M19.59 6.69a4.83 4.83 0 0 1-3.77-4.25V2h-3.1v13.16a2.9 2.9 0 1 1-2-2.75V9.27a6 6 0 1 0 5.1 5.94V8.54a7.9 7.9 0 0 0 4.77 1.6V6.99c-.34 0-.67-.1-1-.3Z"/>
             </svg>
             <span>TikTok</span>
           </a>
 
-          <a class="social-btn" href="#" aria-label="North Theory on YouTube">
+          <a class="social-btn scroll-reveal delay-1" href="#" aria-label="North Theory on YouTube">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
               <rect x="3" y="5" width="18" height="14" rx="3"></rect>
               <path d="M10 9l5 3-5 3V9z" fill="currentColor" stroke="none"></path>
@@ -830,7 +894,7 @@
             <span>YouTube</span>
           </a>
 
-          <a class="social-btn" href="#" aria-label="North Theory on Instagram">
+          <a class="social-btn scroll-reveal delay-2" href="#" aria-label="North Theory on Instagram">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
               <rect x="3" y="3" width="18" height="18" rx="5"></rect>
               <circle cx="12" cy="12" r="4"></circle>
@@ -844,12 +908,12 @@
 
     <section class="section-light" id="checklist">
       <div class="container">
-        <div class="section-heading">
+        <div class="section-heading scroll-reveal">
           <h2>Get the Arctic packing checklist</h2>
           <p>Join the list and get a simple cold-weather packing checklist for Northern Norway.</p>
         </div>
 
-        <form class="checklist-form" onsubmit="event.preventDefault(); alert('This is a placeholder form. Connect it to an email tool later.');">
+        <form class="checklist-form scroll-reveal" onsubmit="event.preventDefault(); alert('This is a placeholder form. Connect it to an email tool later.');">
           <input type="email" placeholder="Your email address" aria-label="Your email address" required />
           <button class="btn btn-accent" type="submit">Send me the checklist →</button>
         </form>
@@ -859,7 +923,7 @@
 
   <footer class="footer">
     <div class="container">
-      <div class="footer-grid">
+      <div class="footer-grid scroll-reveal">
         <div>
           <a href="#top" class="brand">
             <svg viewBox="0 0 32 32" fill="none" aria-hidden="true">
@@ -899,6 +963,28 @@
 
     navLinks.querySelectorAll('a').forEach((link) => {
       link.addEventListener('click', () => navLinks.classList.remove('open'));
+    });
+
+    const revealElements = document.querySelectorAll('.scroll-reveal');
+
+    const revealObserver = new IntersectionObserver((entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+          revealObserver.unobserve(entry.target);
+        }
+      });
+    }, {
+      threshold: 0.12,
+      rootMargin: '0px 0px -70px 0px'
+    });
+
+    revealElements.forEach((element, index) => {
+      if (!element.classList.contains('delay-1') && !element.classList.contains('delay-2') && !element.classList.contains('delay-3')) {
+        if (index % 3 === 1) element.classList.add('delay-1');
+        if (index % 3 === 2) element.classList.add('delay-2');
+      }
+      revealObserver.observe(element);
     });
   </script>
 </body>
