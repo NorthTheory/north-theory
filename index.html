@@ -492,6 +492,22 @@
     .status-card.level-mid .v { color:var(--amber); }
     .status-card.level-high .v { color:var(--red); }
 
+    .scale-legend { margin-top:8px; padding-top:16px; border-top:1px solid var(--border); }
+    .scale-legend-title { font-family:"JetBrains Mono",monospace; font-size:11px; letter-spacing:.05em; text-transform:uppercase; color:var(--muted-soft); margin-bottom:10px; }
+    .scale-legend-row { display:flex; flex-wrap:wrap; gap:8px; }
+    .scale-chip {
+      display:inline-flex;
+      align-items:center;
+      gap:6px;
+      font-size:12.5px;
+      color:var(--muted);
+      background:var(--card-hover);
+      border:1px solid var(--border);
+      border-radius:999px;
+      padding:6px 12px;
+    }
+    .scale-chip span { font-size:1.05em; }
+
     .muted-note { font-size:13px; color:var(--muted-soft); margin-top:14px; line-height:1.6; }
     .source-tag { font-family:"JetBrains Mono",monospace; font-size:11px; color:var(--muted-soft); display:inline-block; margin-top:18px; }
 
@@ -757,7 +773,7 @@
 
           <div id="mapBox">
             <div id="leafletMap"></div>
-            <div class="map-hint">Click anywhere on the map to set your exact spot. We'll use the nearest known place name for reference.</div>
+            <div class="map-hint">Click a highlighted dot for a known place, or click anywhere else on the map to drop a pin at your exact spot.</div>
           </div>
 
           <div class="picked-note" id="pickedNote"></div>
@@ -965,33 +981,66 @@
         { name: "Kvaløya", lat: 69.6300, lon: 18.5000 },
         { name: "Sommarøy", lat: 69.6350, lon: 17.9800 },
         { name: "Tromvik", lat: 69.6500, lon: 18.5300 },
+        { name: "Karlsøy", lat: 69.9200, lon: 19.7700 },
         { name: "Lyngseidet, Lyngen", lat: 69.5760, lon: 20.2270 },
         { name: "Lyngen Alps", lat: 69.4900, lon: 19.9500 },
         { name: "Skibotn", lat: 69.3900, lon: 20.2700 },
         { name: "Kåfjord", lat: 69.4300, lon: 20.6800 },
+        { name: "Storfjord", lat: 69.3300, lon: 20.4500 },
+        { name: "Nordreisa / Storslett", lat: 69.7830, lon: 21.0330 },
+        { name: "Kvænangen", lat: 69.9500, lon: 21.8000 },
+        { name: "Skjervøy", lat: 70.0330, lon: 20.9760 },
         { name: "Senja — Husøy", lat: 69.5900, lon: 17.5600 },
         { name: "Senja — Mefjordvær", lat: 69.5400, lon: 17.7300 },
+        { name: "Senja — Torsken", lat: 69.6350, lon: 17.2200 },
+        { name: "Senja — Berg", lat: 69.4600, lon: 17.3200 },
         { name: "Finnsnes", lat: 69.2300, lon: 17.9800 },
+        { name: "Sørreisa", lat: 69.1330, lon: 18.0500 },
+        { name: "Dyrøy", lat: 69.1500, lon: 18.0000 },
         { name: "Setermoen, Bardu", lat: 68.9600, lon: 18.5200 },
         { name: "Målselv", lat: 69.0800, lon: 18.5900 },
+        { name: "Bardufoss", lat: 69.0670, lon: 18.5330 },
+        { name: "Salangen", lat: 68.9330, lon: 17.9300 },
+        { name: "Lavangen", lat: 68.9500, lon: 17.5300 },
+        { name: "Gratangen", lat: 68.6300, lon: 17.3300 },
+        { name: "Ibestad", lat: 68.7300, lon: 17.0500 },
+        { name: "Kvæfjord", lat: 68.7100, lon: 16.6500 },
+        { name: "Skånland", lat: 68.5900, lon: 16.6300 },
+        { name: "Evenes", lat: 68.4900, lon: 16.6900 },
         { name: "Narvik", lat: 68.4385, lon: 17.4272 },
+        { name: "Ballangen", lat: 68.3400, lon: 16.7500 },
+        { name: "Hamarøy", lat: 68.0900, lon: 15.9800 },
+        { name: "Steigen", lat: 67.9200, lon: 15.0400 },
         { name: "Harstad", lat: 68.7983, lon: 16.5414 },
         { name: "Andenes, Vesterålen", lat: 69.3200, lon: 16.1200 },
         { name: "Sortland, Vesterålen", lat: 68.6960, lon: 15.4160 },
         { name: "Stokmarknes", lat: 68.5680, lon: 14.9110 },
+        { name: "Melbu", lat: 68.5030, lon: 14.8020 },
         { name: "Svolvær, Lofoten", lat: 68.2340, lon: 14.5680 },
+        { name: "Leknes / Vestvågøy", lat: 68.1490, lon: 13.6120 },
+        { name: "Henningsvær", lat: 68.1580, lon: 14.1900 },
         { name: "Reine, Lofoten", lat: 67.9350, lon: 13.0900 },
         { name: "Å i Lofoten", lat: 67.8850, lon: 12.9800 },
+        { name: "Moskenes", lat: 67.9700, lon: 13.0700 },
+        { name: "Værøy", lat: 67.6660, lon: 12.6900 },
+        { name: "Røst", lat: 67.5240, lon: 12.1000 },
         { name: "Bodø", lat: 67.2804, lon: 14.4049 },
+        { name: "Meløy / Glomfjord", lat: 66.8300, lon: 13.9700 },
         { name: "Alta", lat: 69.9689, lon: 23.2717 },
         { name: "Hammerfest", lat: 70.6634, lon: 23.6821 },
         { name: "Nordkapp / Honningsvåg", lat: 71.0980, lon: 25.9740 },
-        { name: "Kirkenes", lat: 69.7269, lon: 30.0450 },
-        { name: "Pasvikdalen, Kirkenes", lat: 69.4700, lon: 30.0300 },
+        { name: "Lakselv / Porsanger", lat: 70.0530, lon: 24.9700 },
+        { name: "Karasjok", lat: 69.4700, lon: 25.5100 },
+        { name: "Kautokeino", lat: 69.0110, lon: 23.0410 },
+        { name: "Tana", lat: 70.1900, lon: 28.1500 },
+        { name: "Berlevåg", lat: 70.8580, lon: 29.0850 },
+        { name: "Båtsfjord", lat: 70.6330, lon: 29.7170 },
+        { name: "Gamvik / Mehamn", lat: 71.0400, lon: 27.8500 },
         { name: "Vardø", lat: 70.3706, lon: 31.1107 },
         { name: "Vadsø", lat: 70.0741, lon: 29.7487 },
-        { name: "Skjervøy", lat: 70.0330, lon: 20.9760 },
-        { name: "Gratangen", lat: 68.6300, lon: 17.3300 }
+        { name: "Nesseby", lat: 70.1330, lon: 28.7500 },
+        { name: "Kirkenes", lat: 69.7269, lon: 30.0450 },
+        { name: "Pasvikdalen, Kirkenes", lat: 69.4700, lon: 30.0300 }
       ];
 
       const placeInput = document.getElementById('placeInput');
@@ -1020,21 +1069,30 @@
         mapToggle.textContent = showing ? 'Or pick on map ↓' : 'Hide map ↑';
 
         if (!showing && !map) {
-          map = L.map('leafletMap', { scrollWheelZoom: false }).setView([69.6, 18.95], 5);
+          map = L.map('leafletMap', { scrollWheelZoom: true, minZoom: 4, maxZoom: 13 }).setView([69.6, 18.95], 5);
 
           L.tileLayer('https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png', {
             attribution: '&copy; OpenStreetMap &copy; CARTO',
             subdomains: 'abcd',
-            maxZoom: 12
+            maxZoom: 13
           }).addTo(map);
 
           PLACES.forEach(p => {
-            L.circleMarker([p.lat, p.lon], {
-              radius: 3,
-              color: '#16d9ff',
-              weight: 1,
-              fillOpacity: 0.7
-            }).addTo(map).bindTooltip(p.name, { direction: 'top', opacity: 0.9 });
+            const dot = L.circleMarker([p.lat, p.lon], {
+              radius: 9,
+              color: '#ffffff',
+              weight: 2,
+              fillColor: '#16d9ff',
+              fillOpacity: 0.85
+            }).addTo(map).bindTooltip(p.name, { direction: 'top', opacity: 0.95, offset: [0, -6] });
+
+            dot.on('mouseover', () => dot.setStyle({ radius: 13, fillColor: '#5de7ff' }));
+            dot.on('mouseout', () => dot.setStyle({ radius: 9, fillColor: '#16d9ff' }));
+            dot.on('click', e => {
+              setPick(p.lat, p.lon, p.name);
+              if (marker) map.removeLayer(marker);
+              marker = L.marker([p.lat, p.lon]).addTo(map);
+            });
           });
 
           map.on('click', e => {
@@ -1082,12 +1140,20 @@
       });
 
       const DANGER_TEXT = {
-        1: { label: 'Low (1 of 5)', tier: 'low', advice: 'Generally favourable conditions. Normal caution in steep terrain still applies.' },
-        2: { label: 'Moderate (2 of 5)', tier: 'low', advice: 'Be careful in specific terrain features. Most slopes are fine with basic route awareness.' },
-        3: { label: 'Considerable (3 of 5)', tier: 'mid', advice: 'Avoid slopes steeper than roughly 30 degrees and their run-out zones. This is the level most visitor incidents happen at.' },
-        4: { label: 'High (4 of 5)', tier: 'high', advice: 'Avalanche terrain should be avoided entirely today. Stick to valleys and marked, low-angle routes.' },
-        5: { label: 'Very high (5 of 5)', tier: 'high', advice: 'Extremely dangerous conditions. Stay out of the mountains today.' }
+        1: { label: 'Low (1 of 5)', tier: 'low', dot: '🟢', advice: 'Generally favourable conditions. Normal caution in steep terrain still applies.' },
+        2: { label: 'Moderate (2 of 5)', tier: 'low', dot: '🟢', advice: 'Be careful in specific terrain features. Most slopes are fine with basic route awareness.' },
+        3: { label: 'Considerable (3 of 5)', tier: 'mid', dot: '🟡', advice: 'Avoid slopes steeper than roughly 30 degrees and their run-out zones. This is the level most visitor incidents happen at.' },
+        4: { label: 'High (4 of 5)', tier: 'high', dot: '🔴', advice: 'Avalanche terrain should be avoided entirely today. Stick to valleys and marked, low-angle routes.' },
+        5: { label: 'Very high (5 of 5)', tier: 'high', dot: '🔴', advice: 'Extremely dangerous conditions. Stay out of the mountains today.' }
       };
+
+      const DANGER_SCALE = [
+        { n: 1, dot: '🟢', label: 'Low' },
+        { n: 2, dot: '🟢', label: 'Moderate' },
+        { n: 3, dot: '🟡', label: 'Considerable' },
+        { n: 4, dot: '🔴', label: 'High' },
+        { n: 5, dot: '🔴', label: 'Very high' }
+      ];
 
       const ACTIVITY_NOTE = {
         ski: 'For ski touring: the avalanche rating below is the single most important number for your day.',
@@ -1116,7 +1182,7 @@
 
       async function fetchWeather(lat, lon) {
         const url = 'https://api.open-meteo.com/v1/forecast?latitude=' + lat + '&longitude=' + lon
-          + '&current=temperature_2m,wind_speed_10m';
+          + '&current=temperature_2m,wind_speed_10m,weather_code';
 
         const res = await fetch(url);
         if (!res.ok) throw new Error('weather api error');
@@ -1124,8 +1190,22 @@
         const data = await res.json();
         return {
           temp: data.current.temperature_2m,
-          wind: data.current.wind_speed_10m
+          wind: data.current.wind_speed_10m,
+          code: data.current.weather_code
         };
+      }
+
+      // WMO weather codes (used by Open-Meteo) mapped to a simple icon + plain label.
+      function weatherIcon(code) {
+        if (code === 0) return { icon: '☀️', label: 'Clear sky' };
+        if (code === 1 || code === 2) return { icon: '🌤️', label: 'Partly cloudy' };
+        if (code === 3) return { icon: '☁️', label: 'Overcast' };
+        if (code === 45 || code === 48) return { icon: '🌫️', label: 'Fog' };
+        if (code >= 51 && code <= 57) return { icon: '🌦️', label: 'Drizzle' };
+        if ((code >= 61 && code <= 67) || (code >= 80 && code <= 82)) return { icon: '🌧️', label: 'Rain' };
+        if ((code >= 71 && code <= 77) || code === 85 || code === 86) return { icon: '🌨️', label: 'Snow' };
+        if (code >= 95) return { icon: '⛈️', label: 'Thunderstorm' };
+        return { icon: '🌡️', label: 'Conditions' };
       }
 
       function render(area, activity, avalanche, weather) {
@@ -1136,7 +1216,7 @@
 
           html += '<div class="' + tierClass(info.tier) + '">'
             + '<div class="k">Avalanche danger — ' + area + '</div>'
-            + '<div class="v">' + info.label + '</div>'
+            + '<div class="v"><span style="font-size:1.15em;margin-right:8px;">' + info.dot + '</span>' + info.label + '</div>'
             + '<div class="d">' + info.advice + '</div></div>';
         } else {
           html += '<div class="status-card level-neutral">'
@@ -1147,15 +1227,24 @@
         if (weather) {
           const t = Math.round(weather.temp);
           const w = Math.round(weather.wind);
+          const wx = weatherIcon(weather.code);
           const windNote = w >= 10
             ? 'Strong wind — expect it to feel much colder, and exposed ridges to be unpleasant or dangerous.'
             : 'Manageable wind for most planned activity.';
 
           html += '<div class="status-card level-neutral">'
             + '<div class="k">Right now</div>'
-            + '<div class="v">' + t + '°C · wind ' + w + ' m/s</div>'
+            + '<div class="v"><span style="font-size:1.3em;margin-right:8px;">' + wx.icon + '</span>' + t + '°C, ' + wx.label + ' · wind ' + w + ' m/s</div>'
             + '<div class="d">' + windNote + '</div></div>';
         }
+
+        html += '<div class="scale-legend">'
+          + '<div class="scale-legend-title">Avalanche danger scale, explained</div>'
+          + '<div class="scale-legend-row">'
+          + DANGER_SCALE.map(function(s){
+              return '<div class="scale-chip"><span>' + s.dot + '</span> ' + s.n + ' · ' + s.label + '</div>';
+            }).join('')
+          + '</div></div>';
 
         resultEl.innerHTML = html;
         resultEl.style.display = 'block';
